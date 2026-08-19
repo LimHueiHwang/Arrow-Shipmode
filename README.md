@@ -1,42 +1,101 @@
-# VN01 Arrow Ship Mode & OH Merge Automation
+# Arrow Ship Mode & OH Merge Automation
 
-Automates merging of VN01 On-Hand (OH) Parts data with Arrow Ship Mode (ASM) files and outputs a consolidated Excel file filtered by specific criteria.
+Python automation that combines weekly On-Hand and Arrow Ship Mode Excel data into a consolidated Purchasing report.
 
-This script is designed to improve reporting efficiency for the Europe & Other Asia Team at Jabil by reducing manual Excel handling and ensuring consistency in weekly Arrow shipment reporting.
+## Overview
 
----
+This project automates a recurring Excel-based reporting workflow used by a Purchasing team.
 
-## Features
+The automation reads two Excel datasets, prepares the data, applies business rules, merges the records using Customer Part Number, filters the required Purchasing Group records, and generates a consolidated Excel report.
 
-- Reads VN01 OH Parts Excel file and Arrow Ship Mode Excel file for the current ISO week.
-- Handles merged or missing values using forward fill (`ffill`) to ensure clean data.
-- Ensures consistent invoice numbers by filling them down if CUSTOMER PO values match.
-- Standardizes column names for compatibility between OH and ASM files.
-- Merges OH and ASM data on CUSTOMER PART NUMBER.
-- Filters merged data for PGr codes starting with 'U'.
-- Selects only the required columns for reporting.
-- Outputs a weekly Excel file named 'JB <file_name>.xlsx' in the corresponding Arrow Ship Mode folder.
-- Prints a list of unique Buyer Names in the console.
+The automation is used in a Purchasing team production workflow.
 
----
+## Business Problem
 
-## How It Works
+The weekly process required repetitive manual Excel preparation, including filling down repeated values, maintaining invoice information, matching datasets, filtering records, and preparing the final report.
 
-1. **Determine Current Week & File Paths**
-   - Automatically generates paths based on the current ISO week for ASM files.
-   - Uses the current week’s Monday date to locate OH part files.
+The automation standardizes these steps using Python and pandas.
 
-2. **Data Processing**
-   - Reads Excel files using pandas.
-   - Performs forward fill on key columns (MPN, CUSTOMER PART NUMBER, CUSTOMER PO, QUANTITY SHIPPED, UNIT PRICE, Buyer).
-   - Copies invoice numbers down rows if CUSTOMER PO values are repeated.
-   - Merges OH and ASM data on CUSTOMER PART NUMBER.
-   - Filters merged data for specific PGr codes.
-   - Selects desired columns for the final report.
+## Solution
 
-3. **Output**
-   - Saves the consolidated Excel report in the structured folder path:
-     //sgsind0nsifsv01a/.../ARROW SHIP MODE/WWxx'yy/JB <file_name>.xlsx
-   - Prints unique Buyer Names for quick reference.
-  
-  ---
+The script:
+
+1. Determines the current reporting week.
+2. Locates the required On-Hand and Arrow Ship Mode files using configured paths.
+3. Reads and prepares both datasets.
+4. Forward-fills selected Arrow Ship Mode fields.
+5. Propagates Invoice Number when consecutive records share the same Customer PO.
+6. Normalizes Customer Part Number values.
+7. Merges the datasets using Customer Part Number.
+8. Filters records where `PGr` starts with `U`.
+9. Selects the required reporting columns.
+10. Generates the consolidated Excel report.
+
+## Workflow
+
+The detailed processing flow is available in [`docs/diagrams/workflow.png`](docs/diagrams/workflow.png).
+
+## Architecture
+
+The application uses a simple Python/pandas script-based architecture. The architecture diagram is available in [`docs/diagrams/architecture.png`](docs/diagrams/architecture.png).
+
+## Technologies
+
+* Python
+* pandas
+* openpyxl
+* Microsoft Excel
+
+## Key Features
+
+* Weekly file-path handling
+* Excel data processing
+* Forward-fill transformation
+* Invoice number propagation
+* Customer Part Number matching
+* DataFrame merge
+* Purchasing Group filtering
+* Excel report generation
+
+## Input & Output
+
+**Input**
+
+* VN01 On-Hand Part Excel data
+* Arrow Ship Mode Excel data
+
+The `PGr` used for filtering comes from the On-Hand dataset.
+
+**Output**
+
+A consolidated Excel report containing the required Purchasing and shipment fields.
+
+## Results
+
+The automation standardizes a recurring weekly reporting process and reduces repetitive manual data preparation.
+
+No percentage or time-saving metric is stated because verified measurements are not available.
+
+## My Role
+
+I developed and maintained the automation, translating Purchasing requirements into Python/pandas data-processing rules and maintaining the reporting workflow.
+
+## Limitations
+
+* Depends on the expected structure and column names of the source Excel files.
+* File locations are environment-specific.
+* The merge relationship is not explicitly validated.
+* The final Arrow Ship Mode row is excluded before processing.
+* Customer Part Number normalization could be made more robust.
+* Error handling is currently basic.
+
+## Future Improvements
+
+* Input file and column validation
+* Safer Customer Part Number normalization
+* More explicit handling of non-detail rows
+* More detailed processing feedback
+
+## Disclaimer
+
+This repository contains a sanitized portfolio version. Company-specific files, confidential business data, and internal network locations are excluded.
