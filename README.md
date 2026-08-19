@@ -33,11 +33,11 @@ The script:
 
 ## Workflow
 
-The detailed processing flow is available in [`docs/diagrams/workflow.png`](docs/diagrams/workflow.png).
+The detailed processing flow is available in ![docs/diagrams/workflow.png](docs/diagrams/workflow.png).
 
 ## Architecture
 
-The application uses a simple Python/pandas script-based architecture. The architecture diagram is available in [`docs/diagrams/architecture.png`](docs/diagrams/architecture.png).
+The application uses a simple Python/pandas script-based architecture. The architecture diagram is available in ![docs/diagrams/architecture.png](docs/diagrams/architecture.png).
 
 ## Technologies
 
