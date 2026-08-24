@@ -1,22 +1,157 @@
+# ============================================================
 # Python
+# ============================================================
+
 __pycache__/
 *.py[cod]
+*$py.class
 
 # Virtual environments
 .venv/
 venv/
+env/
+ENV/
 
-# Local configuration
-config/config.py
+# Python packaging
+build/
+dist/
+*.egg-info/
+.eggs/
 
-# Excel / company data
-*.xlsx
-*.xlsm
+# Test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
 
-# IDE
+# Type checking / linting
+.mypy_cache/
+.pyre/
+.ruff_cache/
+
+
+# ============================================================
+# IDE / Editor
+# ============================================================
+
 .vscode/
 .idea/
 
-# OS
-.DS_Store
+# VS Code local settings
+*.code-workspace
+
+# Jupyter
+.ipynb_checkpoints/
+
+
+# ============================================================
+# Environment / Secrets
+# ============================================================
+
+.env
+.env.*
+!.env.example
+
+# Local configuration files containing company paths
+config/config.py
+
+# Allow the sanitized configuration template
+!config/config.example.py
+
+
+# ============================================================
+# Excel / Office Files
+# ============================================================
+
+# Ignore real/company Excel files
+*.xlsx
+*.xls
+*.xlsm
+*.xlsb
+*.csv
+
+# Allow sanitized portfolio examples
+!docs/examples/
+!docs/examples/*.xlsx
+
+
+# ============================================================
+# Logs / Temporary Files
+# ============================================================
+
+*.log
+logs/
+
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# Windows temporary files
 Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Excel temporary/lock files
+~$*.xlsx
+~$*.xls
+~$*.xlsm
+
+
+# ============================================================
+# Build / Executables
+# ============================================================
+
+*.exe
+*.spec
+
+# PyInstaller
+*.manifest
+
+
+# ============================================================
+# OS Files
+# ============================================================
+
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+
+# ============================================================
+# Local / Company-Specific Data
+# ============================================================
+
+# Local data folders
+data/
+output/
+input/
+
+# Company/network exports
+exports/
+reports/
+
+
+# ============================================================
+# Secrets / Credentials
+# ============================================================
+
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+credentials.json
+secrets.json
+
+
+# ============================================================
+# Miscellaneous
+# ============================================================
+
+*.orig
+*.rej
